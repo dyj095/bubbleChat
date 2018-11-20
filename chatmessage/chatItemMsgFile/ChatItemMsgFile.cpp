@@ -74,14 +74,6 @@ QSize ChatItemMsgFile::getRealString(QString src)
 QSize ChatItemMsgFile::fontRect(QString src)
 {
     m_msg = src;
-    int minHei = 30;
-    int iconWH = 40;
-    int iconSpaceW = 20;
-    int iconRectW = 5;
-    int iconTMPH = 10;
-    int sanJiaoW = 6;
-    int kuangTMP = 20;
-    int textSpaceRect = 12;
     m_kuangWidth = this->width() - kuangTMP - 2 * (iconWH + iconSpaceW + iconRectW);
     m_textWidth = m_kuangWidth - 2 * textSpaceRect;
     m_spaceWid = this->width() - m_textWidth;
@@ -89,7 +81,6 @@ QSize ChatItemMsgFile::fontRect(QString src)
     m_iconRightRect = QRect(this->width() - iconSpaceW - iconWH, iconTMPH, iconWH, iconWH);
 
     QSize size = getRealString(m_msg);
-    //qDebug() << "fontRect Size:" << size;
     int hei = size.height() < minHei ? minHei : size.height();
 
     m_sanjiaoLeftRect = QRect(iconWH+iconSpaceW+iconRectW, m_lineHeight/2, sanJiaoW, hei - m_lineHeight);
