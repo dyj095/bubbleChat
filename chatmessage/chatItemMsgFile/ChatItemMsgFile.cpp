@@ -12,6 +12,13 @@ ChatItemMsgFile::ChatItemMsgFile(QWidget *parent) :
     ui(new Ui::ChatItemMsgFile)
 {
     ui->setupUi(this);
+    progressBar = new QProgressBar(ui->topWidget);
+    //progressBar->setTextDirection(QProgressBar::BottomToTop);
+    progressBar->setTextVisible(false);
+    progressBar->setGeometry(QRect(ui->topWidget->x(), ui->topWidget->height() + 3, ui->topWidget->width(), 2));
+    progressBar->setValue(100);
+    progressBar->show();
+
     QString leftHeadFilePath = QString("D:/Qt/workspace/project/bubbleChat/imgs/pic/2.jpg");
     QPixmap leftPixmap;
     leftPixmap.load(leftHeadFilePath);
@@ -37,6 +44,7 @@ ChatItemMsgFile::ChatItemMsgFile(QWidget *parent) :
 
 ChatItemMsgFile::~ChatItemMsgFile()
 {
+    delete progressBar;
     delete ui;
 }
 
@@ -178,3 +186,4 @@ void ChatItemMsgFile::paintEvent(QPaintEvent *event){
         painter.drawText(this->rect(),m_curTime,option);
     }
 }
+

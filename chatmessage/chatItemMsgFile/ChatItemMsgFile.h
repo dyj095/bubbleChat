@@ -2,6 +2,8 @@
 #define CHATITEMMSGFILE_H
 
 #include <QWidget>
+#include <QProgressBar>
+#include <QTimer>
 #include "MessageUtil.h"
 #include "CommonUtils.h"
 
@@ -32,9 +34,10 @@ public:
     inline MessageUtil::Bubble_Type bubbleType(){return m_bubbleType;}
 protected:
     void paintEvent(QPaintEvent *event);
-
 private:
     Ui::ChatItemMsgFile *ui;
+    QProgressBar *progressBar;
+
     QString m_msg;
     QString m_time;
     QString m_curTime;
