@@ -2,5 +2,22 @@
     <qresource prefix="/chatmessage">
         <file>Resources/img/head_mask.png</file>
         <file>Resources/img/loading.gif</file>
+        <file>Resources/filetype/android.png</file>
+        <file>Resources/filetype/apple.png</file>
+        <file>Resources/filetype/bat.png</file>
+        <file>Resources/filetype/delete.png</file>
+        <file>Resources/filetype/doc.png</file>
+        <file>Resources/filetype/download.png</file>
+        <file>Resources/filetype/exe.png</file>
+        <file>Resources/filetype/img.png</file>
+        <file>Resources/filetype/log.png</file>
+        <file>Resources/filetype/pdf.png</file>
+        <file>Resources/filetype/ppt.png</file>
+        <file>Resources/filetype/rar.png</file>
+        <file>Resources/filetype/txt.png</file>
+        <file>Resources/filetype/updata.png</file>
+        <file>Resources/filetype/video.png</file>
+        <file>Resources/filetype/xls.png</file>
+        <file>Resources/filetype/zip.png</file>
     </qresource>
 </RCC>

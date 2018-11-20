@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->btn_send, SIGNAL(clicked(bool)), this, SLOT(onBtnSendClicked()));
     connect(ui->btn_sendImg, SIGNAL(clicked(bool)), this, SLOT(onBtnSendImgClicked()));
+    connect(ui->btn_sendFile, SIGNAL(clicked(bool)), this, SLOT(onBtnSendFileClicked()));
 }
 
 MainWindow::~MainWindow()
@@ -119,6 +120,49 @@ void MainWindow::onBtnSendImgClicked()
     }
 }
 
+void MainWindow::onBtnSendFileClicked()
+{
+    QString message("File");
+    ui->textEdit->setText("");
+    QString time = QString::number(QDateTime::currentDateTime().toTime_t()); //时间戳
+    // 发送中
+    bool isSending = true;
+    if (ui->listWidget->count() % 2) {
+        if (isSending) {
+            displayTime(time);
+
+            ChatItemMsgFile* messageW = new ChatItemMsgFile(ui->listWidget->parentWidget());
+            QListWidgetItem* item = new QListWidgetItem(ui->listWidget);
+            displayMessageForFile(messageW, item, message, time, MessageUtil::Bubble_Me);
+        }else {
+            bool isOver = true;
+            for(int i = ui->listWidget->count() - 1; i > 0; i--) {
+                ChatItemMsgFile* messageW = (ChatItemMsgFile*)ui->listWidget->itemWidget(ui->listWidget->item(i));
+                if(messageW->message() == message) {
+                    isOver = false;
+                    messageW->setSuccess();
+                }
+            }
+            if(isOver) {
+                displayTime(time);
+
+                ChatItemMsgFile* messageW = new ChatItemMsgFile(ui->listWidget->parentWidget());
+                QListWidgetItem* item = new QListWidgetItem(ui->listWidget);
+                displayMessageForFile(messageW, item, message, time, MessageUtil::Bubble_Me);
+                messageW->setSuccess();
+            }
+        }
+    } else {
+        if(message != "") {
+            displayTime(time);
+
+            ChatItemMsgFile* messageW = new ChatItemMsgFile(ui->listWidget->parentWidget());
+            QListWidgetItem* item = new QListWidgetItem(ui->listWidget);
+            displayMessageForFile(messageW, item, message, time, MessageUtil::Bubble_She);
+        }
+    }
+}
+
 void MainWindow::displayTime(QString curMsgTime)
 {
     bool isShowTime = false;
@@ -133,6 +177,11 @@ void MainWindow::displayTime(QString curMsgTime)
             ChatItemMsgImg* messageImg = dynamic_cast<ChatItemMsgImg*>(tempWidget);
             if (messageImg) {
                 lastTime = messageImg->time().toInt();
+            } else {
+                ChatItemMsgFile* messageFile = dynamic_cast<ChatItemMsgFile*>(tempWidget);
+                if (messageFile) {
+                    lastTime = messageFile->time().toInt();
+                }
             }
         }
 
@@ -175,6 +224,16 @@ void MainWindow::displayMessageForImg(ChatItemMsgImg *messageW, QListWidgetItem 
     ui->listWidget->setItemWidget(item, messageW);
 }
 
+void MainWindow::displayMessageForFile(ChatItemMsgFile *messageW, QListWidgetItem *item, QString text, QString time, MessageUtil::Bubble_Type type)
+{
+    messageW->setFixedWidth(this->width());
+    messageW->setMaximumHeight(ui->listWidget->height());
+    QSize size = messageW->fontRect(text);
+    item->setSizeHint(size);
+    messageW->setMessage(text, time, size, type);
+    ui->listWidget->setItemWidget(item, messageW);
+}
+
 
 void MainWindow::resizeEvent(QResizeEvent *event){
     Q_UNUSED(event);
@@ -197,6 +256,11 @@ void MainWindow::resizeEvent(QResizeEvent *event){
             ChatItemMsgImg* messageImg = dynamic_cast<ChatItemMsgImg*>(tempWidget);
             if (messageImg) {
                 displayMessageForImg(messageImg, item, messageImg->message(), messageImg->time(), messageImg->bubbleType());
+            } else {
+                ChatItemMsgFile* messageFile = dynamic_cast<ChatItemMsgFile*>(tempWidget);
+                if (messageFile) {
+                    displayMessageForFile(messageFile, item, messageFile->message(), messageFile->time(), messageFile->bubbleType());
+                }
             }
         }
 
