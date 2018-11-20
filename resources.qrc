@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/chatmessage">
+        <file>Resources/img/head_mask.png</file>
+        <file>Resources/img/loading.gif</file>
+    </qresource>
+</RCC>
