@@ -36,6 +36,8 @@ public:
     inline MessageUtil::Bubble_Type bubbleType(){return m_bubbleType;}
 
 protected:
+    void paintEvent(QPaintEvent *event);
+
     virtual void paintContent(QPainter& painter,const QRect& textRect){}
 
     void paintBubble();

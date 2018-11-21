@@ -15,7 +15,6 @@ public:
 
     QSize fontRect(QString src);
 protected:
-    void paintEvent(QPaintEvent *event);
     void paintContent(QPainter& painter,const QRect& textRect);
 
 };

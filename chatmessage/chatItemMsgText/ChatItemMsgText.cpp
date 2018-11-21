@@ -103,12 +103,6 @@ QSize ChatItemMsgText::fontRect(QString src)
     return QSize(size.width(), hei);
 }
 
-void ChatItemMsgText::paintEvent(QPaintEvent *event)
-{
-    Q_UNUSED(event);
-    paintBubble();
-}
-
 void ChatItemMsgText::paintContent(QPainter& painter, const QRect& textRect){
     // 内容
     QPen penText;

@@ -15,8 +15,7 @@ ChatItemMsgFile::ChatItemMsgFile(QWidget *parent) :
 
 ChatItemMsgFile::~ChatItemMsgFile()
 {
-    delete progressBar;
-    delete ui;
+
 }
 
 QSize ChatItemMsgFile::getRealString(QString src)
@@ -55,11 +54,6 @@ QSize ChatItemMsgFile::fontRect(QString src)
                             m_kuangRightRect.width()-2*textSpaceRect,m_kuangRightRect.height()-2*iconTMPH);
 
     return QSize(size.width(), hei);
-}
-
-void ChatItemMsgFile::paintEvent(QPaintEvent *event){
-    Q_UNUSED(event);
-    paintBubble();
 }
 
 void ChatItemMsgFile::paintContent(QPainter &painter, const QRect &textRect)

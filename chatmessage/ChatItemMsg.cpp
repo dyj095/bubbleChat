@@ -52,6 +52,12 @@ void ChatItemMsg::setMessage(QString message, QString time, QSize allSize, Messa
     }
 }
 
+void ChatItemMsg::paintEvent(QPaintEvent *event)
+{
+    Q_UNUSED(event);
+    paintBubble();
+}
+
 void ChatItemMsg::paintBubble()
 {
     QPainter painter(this);
