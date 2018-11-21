@@ -7,6 +7,7 @@
 #include "chatItemMsgImg/ChatItemMsgImg.h"
 #include "chatItemMsgFile/ChatItemMsgFile.h"
 #include "MessageUtil.h"
+#include "ChatItemMsg.h"
 
 namespace Ui {
 class MainWindow;
@@ -27,9 +28,12 @@ private slots:
 
 private:
     void displayTime(QString curMsgTime);
-    void displayMessage(ChatItemMsgText *messageW, QListWidgetItem *item, QString text, QString time, MessageUtil::Bubble_Type type);
-    void displayMessageForImg(ChatItemMsgImg *messageW, QListWidgetItem *item, QString text, QString time, MessageUtil::Bubble_Type type);
-    void displayMessageForFile(ChatItemMsgFile *messageW, QListWidgetItem *item, QString text, QString time, MessageUtil::Bubble_Type type);
+    //void displayMessage(ChatItemMsgText *messageW, QListWidgetItem *item, QString text, QString time, MessageUtil::Bubble_Type type);
+    //void displayMessageForImg(ChatItemMsgImg *messageW, QListWidgetItem *item, QString text, QString time, MessageUtil::Bubble_Type type);
+    //void displayMessageForFile(ChatItemMsgFile *messageW, QListWidgetItem *item, QString text, QString time, MessageUtil::Bubble_Type type);
+
+
+    void displayMessage(ChatItemMsg *messageW, QListWidgetItem *item, QString text, QString time, MessageUtil::Bubble_Type type);
 
 protected:
     void resizeEvent(QResizeEvent *event);
