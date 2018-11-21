@@ -198,6 +198,7 @@ void MainWindow::displayTime(QString curMsgTime)
 void MainWindow::displayMessage(ChatItemMsg *messageW, QListWidgetItem *item, QString text, QString time, MessageUtil::Bubble_Type type)
 {
     messageW->setFixedWidth(this->width());
+    messageW->setMaximumHeight(ui->listWidget->height());
     QSize size = messageW->fontRect(text);
     item->setSizeHint(size);
     messageW->setMessage(text, time, size, type);

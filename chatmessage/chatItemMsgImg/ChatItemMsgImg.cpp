@@ -2,7 +2,7 @@
 
 ChatItemMsgImg::ChatItemMsgImg(QWidget *parent) : ChatItemMsg(parent)
 {
-
+    m_lineHeight = 20;
 }
 
 ChatItemMsgImg::~ChatItemMsgImg()
@@ -14,10 +14,12 @@ QSize ChatItemMsgImg::getRealString(QString src)
 {
     int nMaxWidth = 0;
     int nCount = 0;
+    int height = 0;
     if (!pixmap.isNull()) {
         QSize size = pixmap.size();
         nCount = size.height() / m_lineHeight;
         nMaxWidth = size.width();
+        height = size.height();
         if (size.width() >= size.height()) {
             // 横
             if (size.width() > maxW) {
@@ -25,15 +27,18 @@ QSize ChatItemMsgImg::getRealString(QString src)
                 if (tmp.height() > maxH) {
                     QPixmap tmp1 = tmp.scaledToHeight(maxH);
                     nMaxWidth = tmp1.width();
-                    nCount = maxH / m_lineHeight;
+                    nCount = maxH / m_lineHeight;                    
+                    height = tmp1.height();
                 } else {
                     nMaxWidth = maxW;
                     nCount = tmp.height() / m_lineHeight;
+                    height = tmp.height();
                 }
             } else if (size.height() > maxH) {
                 QPixmap tmp1 = pixmap.scaledToHeight(maxH);
                 nMaxWidth = tmp1.width();
-                nCount = maxH / m_lineHeight;
+                nCount = maxH / m_lineHeight;                
+                height = tmp1.height();
             }
         } else {
             // 竖
@@ -42,19 +47,23 @@ QSize ChatItemMsgImg::getRealString(QString src)
                 if (tmp.width() > maxW) {
                     QPixmap tmp1 = tmp.scaledToWidth(maxW);
                     nMaxWidth = maxW;
-                    nCount = tmp1.height() / m_lineHeight;
+                    nCount = tmp1.height() / m_lineHeight;                    
+                    height = tmp1.height();
                 } else {
                     nMaxWidth = tmp.width();
                     nCount = maxH / m_lineHeight;
+                    height = tmp.height();
                 }
             } else if (size.width() > maxW) {
                 QPixmap tmp1 = pixmap.scaledToWidth(maxW);
                 nMaxWidth = maxW;
                 nCount = tmp1.height() / m_lineHeight;
+                height = tmp1.height();
             }
         }
     }
-    return QSize(nMaxWidth + m_spaceWid, (nCount + 1) * m_lineHeight + 2*m_lineHeight);
+    //return QSize(nMaxWidth + m_spaceWid, (nCount + 1) * m_lineHeight + 2*m_lineHeight);
+    return QSize(nMaxWidth, height + 2*m_lineHeight);
 }
 
 QSize ChatItemMsgImg::fontRect(QString src)
@@ -86,22 +95,29 @@ QSize ChatItemMsgImg::fontRect(QString src)
     QSize size = getRealString(src);
 
     int hei = size.height() < minHei ? minHei : size.height();
+    qDebug() << "w:" << size.width() << " h:" << size.height();
 
     m_sanjiaoLeftRect = QRect(iconWH + iconSpaceW + iconRectW, m_lineHeight/2, sanJiaoW, hei - m_lineHeight);
     m_sanjiaoRightRect = QRect(this->width() - iconRectW - iconWH - iconSpaceW - sanJiaoW, m_lineHeight/2, sanJiaoW, hei - m_lineHeight);
 
-    if (size.width() < (m_textWidth + m_spaceWid)) {
+    if (size.width() < (m_textWidth)) {
         m_kuangLeftRect.setRect(m_sanjiaoLeftRect.x() + m_sanjiaoLeftRect.width(),
                                 m_lineHeight/4*3,
-                                size.width() - m_spaceWid + 2*textSpaceRect,
+                                size.width() + 2*textSpaceRect,
                                 hei - m_lineHeight);
-        m_kuangRightRect.setRect(this->width() - size.width() + m_spaceWid - 2*textSpaceRect - iconWH - iconSpaceW - iconRectW - sanJiaoW,
+        m_kuangRightRect.setRect(this->width() - size.width() - 2*textSpaceRect - iconWH - iconSpaceW - iconRectW - sanJiaoW,
                                  m_lineHeight/4*3,
-                                 size.width() - m_spaceWid + 2*textSpaceRect,
+                                 size.width() + 2*textSpaceRect,
                                  hei - m_lineHeight);
     } else {
-        m_kuangLeftRect.setRect(m_sanjiaoLeftRect.x() + m_sanjiaoLeftRect.width(), m_lineHeight/4*3, m_kuangWidth, hei - m_lineHeight);
-        m_kuangRightRect.setRect(iconWH + iconSpaceW + iconRectW + kuangTMP - sanJiaoW, m_lineHeight/4*3, m_kuangWidth, hei-m_lineHeight);
+        m_kuangLeftRect.setRect(m_sanjiaoLeftRect.x() + m_sanjiaoLeftRect.width(),
+                                m_lineHeight/4*3,
+                                m_kuangWidth,
+                                hei - m_lineHeight);
+        m_kuangRightRect.setRect(iconWH + iconSpaceW + iconRectW + kuangTMP - sanJiaoW,
+                                 m_lineHeight/4*3,
+                                 m_kuangWidth,
+                                 hei-m_lineHeight);
     }
     m_textLeftRect.setRect(m_kuangLeftRect.x() + textSpaceRect, m_kuangLeftRect.y() + iconTMPH,
                            m_kuangLeftRect.width() - 2*textSpaceRect, m_kuangLeftRect.height() - 2*iconTMPH);
