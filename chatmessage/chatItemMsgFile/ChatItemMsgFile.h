@@ -3,6 +3,7 @@
 
 #include <QProgressBar>
 #include <QTimer>
+#include <QMenu>
 
 #include "ChatItemMsg.h"
 
@@ -22,9 +23,19 @@ public:
     QSize fontRect(QString src);
 protected:
     void paintContent(QPainter& painter,const QRect& textRect);
+
+private slots:
+    void onBtnMoreOptionClicked();
+
+    // 用户状态菜单点击;
+    void onMenuClicked(QAction * action);
+
+    void showRightClickMenu(const QPoint &pos);
 private:
     Ui::ChatItemMsgFile *ui;
     QProgressBar *progressBar;
+    QMenu *m_moreOptionMenu;
+    QMenu *m_contextMenu;
 };
 
 #endif // CHATITEMMSGFILE_H
