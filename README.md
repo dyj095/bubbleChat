@@ -1,5 +1,8 @@
 # bubbleChat
-QProgressBar样式表(原文：https://blog.csdn.net/cliffordl/article/details/42063561 )
+bubble参照大佬做的，详见https://gitee.com/sand_teacher_younger_brother/Demo_MessageChat
+
+# QProgressBar样式表
+(原文：https://blog.csdn.net/cliffordl/article/details/42063561 )
 
 ## 第一步：<br>
        (<br>
