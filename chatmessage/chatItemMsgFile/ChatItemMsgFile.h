@@ -31,6 +31,12 @@ private slots:
     void onMenuClicked(QAction * action);
 
     void showRightClickMenu(const QPoint &pos);
+
+    void openFile(QString url);
+
+    void openFolder(QString url);
+
+    void forward(QString url);
 private:
     Ui::ChatItemMsgFile *ui;
     QProgressBar *progressBar;

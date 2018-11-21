@@ -203,29 +203,29 @@
           </spacer>
          </item>
          <item>
-          <widget class="QLabel" name="label">
+          <widget class="QLabel" name="lbOpenFile">
            <property name="styleSheet">
-            <string notr="true">color: rgb(45, 173, 225);</string>
+            <string notr="true">QLable:hover{text-decoration: underline;}</string>
            </property>
            <property name="text">
-            <string>&lt;a href=&quot;http://www.baidu.com&quot;&gt;打开&lt;/a&gt;</string>
+            <string>&lt;style&gt;a{text-decoration: none;}&lt;/style&gt;&lt;a style='color: #16A4DE;' href=&quot;http://www.baidu.com&quot;&gt;打开&lt;/a&gt;</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_2">
+          <widget class="QLabel" name="lbOpenFolder">
            <property name="text">
-            <string>打开文件夹</string>
+            <string>&lt;style&gt;a{text-decoration: none;}&lt;/style&gt;&lt;a style='color: #16A4DE;' href=&quot;http://www.baidu.com&quot;&gt;打开文件夹&lt;/a&gt;</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_3">
+          <widget class="QLabel" name="lbForward">
            <property name="styleSheet">
             <string notr="true">color: rgb(45, 173, 225);</string>
            </property>
            <property name="text">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;http://www.baidu.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;转发&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            <string>&lt;style&gt;a{text-decoration: none;}&lt;/style&gt;&lt;a style='color: #16A4DE;' href=&quot;http://www.baidu.com&quot;&gt;转发&lt;/a&gt;</string>
            </property>
           </widget>
          </item>

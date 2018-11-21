@@ -14,8 +14,13 @@ ChatItemMsgFile::ChatItemMsgFile(QWidget *parent) :
     //progressBar->show();
     progressBar->hide();
     ui->fileWidget->setContextMenuPolicy(Qt::CustomContextMenu);
+
     connect(ui->fileWidget, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(showRightClickMenu(QPoint)));
     connect(ui->btnMoreOption, SIGNAL(clicked(bool)), this, SLOT(onBtnMoreOptionClicked()));
+
+    connect(ui->lbOpenFile, SIGNAL(linkActivated(QString)), this, SLOT(openFile(QString)));
+    connect(ui->lbOpenFolder, SIGNAL(linkActivated(QString)), this, SLOT(openFolder(QString)));
+    connect(ui->lbForward, SIGNAL(linkActivated(QString)), this, SLOT(forward(QString)));
 }
 
 ChatItemMsgFile::~ChatItemMsgFile()
@@ -131,4 +136,19 @@ void ChatItemMsgFile::showRightClickMenu(const QPoint &pos)
     QPoint pos1 = ui->fileWidget->mapToGlobal(QPoint(0, 0)) + pos;
 
     m_contextMenu->exec(pos1);
+}
+
+void ChatItemMsgFile::openFile(QString url)
+{
+    qDebug() << "openFile:" << url;
+}
+
+void ChatItemMsgFile::openFolder(QString url)
+{
+    qDebug() << "openFolder:" << url;
+}
+
+void ChatItemMsgFile::forward(QString url)
+{
+    qDebug() << "forward:" << url;
 }
