@@ -45,24 +45,26 @@ QSize ChatItemMsgText::getRealString(QString src)
                 src.replace(value, temp);
             }
         } else {
-            int length = (nCount + 1);
-            for(int i = 0; i < length; i++) {
-                // 第i行消息内容
-                QString value = src.split("\n").at(i);
-                nMaxWidth = fm.width(value) > nMaxWidth ? fm.width(value) : nMaxWidth;
-                if (fm.width(value) > m_textWidth) {
-                    nMaxWidth = m_textWidth;
-                    // 气泡中1行可以显示的字符数
-                    int size = m_textWidth / fm.width(" ");
-                    // 内容是否可以在1行内显示
-                    int num = fm.width(value) / m_textWidth;
-                    num = ((i + num) * fm.width(" ") + fm.width(value)) / m_textWidth;
-                    nCount += num;
-                    QString temp = "";
-                    for (int j = 0; j < num; j++) {
-                        temp += value.mid(j * size, (j + 1) * size) + "\n";
+            QStringList srcList = src.split("\n");
+            if (!srcList.isEmpty()) {
+                for(int i = 0; i < srcList.length(); i++) {
+                    // 第i行消息内容
+                    QString value = srcList.at(i);
+                    nMaxWidth = fm.width(value) > nMaxWidth ? fm.width(value) : nMaxWidth;
+                    if (fm.width(value) > m_textWidth) {
+                        nMaxWidth = m_textWidth;
+                        // 气泡中1行可以显示的字符数
+                        int size = m_textWidth / fm.width(" ");
+                        // 内容是否可以在1行内显示
+                        int num = fm.width(value) / m_textWidth;
+                        num = ((i + num) * fm.width(" ") + fm.width(value)) / m_textWidth;
+                        nCount += num;
+                        QString temp = "";
+                        for (int j = 0; j < num; j++) {
+                            temp += value.mid(j * size, (j + 1) * size) + "\n";
+                        }
+                        src.replace(value, temp);
                     }
-                    src.replace(value, temp);
                 }
             }
         }
